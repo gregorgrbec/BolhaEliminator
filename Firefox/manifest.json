@@ -1,0 +1,21 @@
+{
+  "manifest_version": 2,
+  "name": "Bolha++",
+  "version": "1.0",
+
+  "description": "QOL improvements to Bolha.com",
+  "homepage_url": "https://github.com/LukaErnestini/BolhaEliminator/tree/main",
+
+  "icons": {
+    "128": "icons/main.png"
+  },
+
+  "permissions": ["activeTab"],
+
+  "browser_action": {
+    "browser_style": true,
+    "default_icon": "icons/toolbar-32.png",
+    "default_title": "Bolha++",
+    "default_popup": "popup/settings.html"
+  }
+}

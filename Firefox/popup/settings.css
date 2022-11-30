@@ -1,0 +1,17 @@
+.hidden {
+  display: none;
+}
+
+input#keywords {
+  width: 400px;
+}
+
+#keywords-container {
+  margin: 5px;
+}
+
+button {
+}
+
+button:hover {
+}
