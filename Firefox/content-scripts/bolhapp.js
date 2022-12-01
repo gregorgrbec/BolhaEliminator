@@ -1,4 +1,21 @@
-deleteAd = function (settings) {
+let counter = 0;
+
+const markAd = function (listItem, reason) {
+  const articleElements = listItem.children[0].children;
+  // Removes article's subelements, leaving only an <h3>
+  // Setting ' > 2 ' would leave price as well
+  while (articleElements.length > 1) {
+    articleElements[1].remove();
+  }
+  // Set ad name as title, so it shows up as tooltip when <h3> is hovered
+  const a = articleElements[0].children[0];
+  a.title = a.text;
+  a.text = reason;
+  counter += 1;
+  console.log(`[${reason}] Oglas z naslovom: "${a.title}" izbrisan`);
+};
+
+const checkAds = function (settings) {
   const filterString = settings.filter || "";
   const filterKeywords = settings.keywords || false;
   const filterMerchants = settings.merchants || false;
@@ -10,8 +27,6 @@ deleteAd = function (settings) {
     ".EntityList-item--Regular, .EntityList-item--VauVau"
   );
 
-  let counter = 0;
-
   // Iterate each ad and delete unwanted ones
   ads.forEach((ad) => {
     const title = ad.children[0].children[0].children[0].innerHTML;
@@ -21,9 +36,7 @@ deleteAd = function (settings) {
     // *
     if (filterExposed) {
       if (ad.className.includes("VauVau")) {
-        ad.remove();
-        counter += 1;
-        console.log(`[IZPOSTAVLJEN] Oglas z naslovom: "${title}" izbrisan`);
+        markAd(ad, "IZPOSTAVLJEN");
         return;
       }
     }
@@ -43,9 +56,7 @@ deleteAd = function (settings) {
         if (li.innerText === "Uporabnik ni trgovec") merchant = false;
       }
       if (merchant) {
-        ad.remove();
-        counter += 1;
-        console.log(`[TRGOVEC] Oglas z naslovom: "${title}" izbrisan`);
+        markAd(ad, "TRGOVEC");
         return;
       }
     }
@@ -57,9 +68,7 @@ deleteAd = function (settings) {
     if (filterBuying) {
       const url = ad.children[0].children[0].children[0].href;
       if (url.includes("-kupim")) {
-        ad.remove();
-        counter += 1;
-        console.log(`[KATEGORIJA KUPIM] Oglas z naslovom: "${title}" izbrisan`);
+        markAd(ad, "KATEGORIJA KUPIM");
         return;
       }
     }
@@ -72,11 +81,7 @@ deleteAd = function (settings) {
       const keywords = filterString.split(";");
       keywords.every((keyword) => {
         if (lowercaseTitle.includes(keyword)) {
-          ad.remove();
-          counter += 1;
-          console.log(
-            `[KEYWORD HIT ("${keyword}")] Oglas z naslovom: "${title}" izbrisan`
-          );
+          markAd(ad, `KEYWORD HIT ("${keyword}")`);
           return false;
         }
         return true;
@@ -97,14 +102,14 @@ deleteAd = function (settings) {
 
 browser.storage.local
   .get(["filter", "keywords", "merchants", "buying", "exposed"])
-  .then(deleteAd);
+  .then(checkAds);
 
 // *
-// * Blurred ad
+// * Blurred ad unblurring
 // *
-const blurredDiv = document.querySelector(
-  ".wrap-content.ClassifiedDetail.ClassifiedDetail--blurContent.cf"
-);
+const blurClass =
+  ".wrap-content.ClassifiedDetail.ClassifiedDetail--blurContent.cf";
+const blurredDiv = document.querySelector(blurClass);
 if (blurredDiv) {
   browser.storage.local.get("blur").then((settings) => {
     // Keep only first class, others make it blurry
