@@ -6,13 +6,14 @@ const exposedToggle = document.querySelector("#exposed-toggle");
 const saveButton = document.querySelector("#save");
 const resetButton = document.querySelector("#reset");
 const debug = document.querySelector("#debug");
+const defaultFilterKeywords =
+  "kupim;kupujem;kupujemo;odkup;odkupim;odkupimo;prodajaš;prodajate";
 
 // *
 // * Initialization of values
 // *
 browser.storage.local.get("filter").then((item) => {
-  if (item.filter) keywordsInput.value = item.filter;
-  else keywordsInput.value = "";
+  keywordsInput.value = item.filter || defaultFilterKeywords;
 });
 browser.storage.local.get("merchants").then((item) => {
   merchantsToggle.checked = item.merchants ??= true;
@@ -34,8 +35,7 @@ saveButton.addEventListener("click", (e) => {
 resetButton.addEventListener("click", (e) => {
   browser.storage.local
     .set({
-      filter:
-        "kupim;kupujem;kupujemo;odkup;odkupim;odkupimo;prodajaš;prodajate",
+      filter: defaultFilterKeywords,
     })
     .then(() => {
       browser.storage.local.get("filter").then((item) => {
