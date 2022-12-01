@@ -82,13 +82,17 @@ deleteAd = function (settings) {
       });
     }
   });
-  // Add warning for user about number of removed ads
-  warning = document.createElement("h3");
-  warning.textContent = `Število oglasov odstranjenih z Bolha Eliminatorjem: ${counter}`;
-  warning.style.backgroundColor = "rgb(245, 196, 122)";
-  warning.style.padding = "5px 5px 5px 8px";
 
-  document.querySelector(".ContentHeader--alpha").appendChild(warning);
+  // If no ads on the page, skip
+  if (ads.length) {
+    console.log(ads);
+    // Add warning for user about number of removed ads
+    warning = document.createElement("h3");
+    warning.textContent = `Število oglasov odstranjenih z Bolha Eliminatorjem: ${counter}`;
+    warning.style.backgroundColor = "rgb(245, 196, 122)";
+    warning.style.padding = "5px 5px 5px 8px";
+    document.querySelector(".ContentHeader--alpha").appendChild(warning);
+  }
 };
 
 browser.storage.local
