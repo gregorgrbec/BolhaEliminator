@@ -3,9 +3,9 @@ const keywordsToggle = document.querySelector("#keywords-toggle");
 const buyingToggle = document.querySelector("#buying-toggle");
 const merchantsToggle = document.querySelector("#merchants-toggle");
 const exposedToggle = document.querySelector("#exposed-toggle");
+const blurToggle = document.querySelector("#blur-toggle");
 const saveButton = document.querySelector("#save");
 const resetButton = document.querySelector("#reset");
-const debug = document.querySelector("#debug");
 const defaultFilterKeywords =
   "kupim;kupujem;kupujemo;odkup;odkupim;odkupimo;prodajaš;prodajate";
 
@@ -14,6 +14,11 @@ const defaultFilterKeywords =
 // *
 browser.storage.local.get("filter").then((item) => {
   keywordsInput.value = item.filter || defaultFilterKeywords;
+  if (!item.filter) {
+    browser.storage.local.set({
+      filter: defaultFilterKeywords,
+    });
+  }
 });
 
 browser.storage.local.get("merchants").then((item) => {
@@ -30,6 +35,10 @@ browser.storage.local.get("buying").then((item) => {
 
 browser.storage.local.get("exposed").then((item) => {
   exposedToggle.checked = item.exposed ??= false;
+});
+
+browser.storage.local.get("blur").then((item) => {
+  blurToggle.checked = item.blur ??= false;
 });
 
 // *
@@ -72,5 +81,11 @@ buyingToggle.addEventListener("change", (e) => {
 exposedToggle.addEventListener("change", (e) => {
   browser.storage.local.set({
     exposed: exposedToggle.checked,
+  });
+});
+
+blurToggle.addEventListener("change", (e) => {
+  browser.storage.local.set({
+    blur: blurToggle.checked,
   });
 });
