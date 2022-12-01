@@ -80,7 +80,7 @@ const checkAds = function (settings) {
       const lowercaseTitle = title.toLowerCase();
       const keywords = filterString.split(";");
       keywords.every((keyword) => {
-        if (lowercaseTitle.includes(keyword)) {
+        if (lowercaseTitle.includes(keyword.toLowerCase())) {
           markAd(ad, `KEYWORD HIT ("${keyword}")`);
           return false;
         }
