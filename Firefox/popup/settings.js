@@ -13,11 +13,16 @@ const defaultFilterKeywords =
 // * Initialization of values
 // *
 browser.storage.local.get("filter").then((item) => {
-  keywordsInput.value = item.filter || defaultFilterKeywords;
-  if (!item.filter) {
+  if (item.filter === undefined) {
+    keywordsInput.value = defaultFilterKeywords;
     browser.storage.local.set({
       filter: defaultFilterKeywords,
     });
+  } else {
+    keywordsInput.value = item.filter;
+  }
+
+  if (!item.filter) {
   }
 });
 

@@ -68,12 +68,13 @@ deleteAd = function (settings) {
     if (filterKeywords && filterString !== "") {
       const lowercaseTitle = title.toLowerCase();
       const keywords = filterString.split(";");
+      console.log(keywords);
       keywords.every((keyword) => {
         if (lowercaseTitle.includes(keyword)) {
           ad.remove();
           counter += 1;
           console.log(
-            `[KEYWORD HIT (${keyword})] Oglas z naslovom: "${title}" izbrisan`
+            `[KEYWORD HIT ("${keyword}")] Oglas z naslovom: "${title}" izbrisan`
           );
           return false;
         }
