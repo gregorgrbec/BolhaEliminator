@@ -1,13 +1,12 @@
 deleteAd = function (settings) {
   const filterString = settings.filter || "";
-  const keywords = filterString.split(";");
   const filterKeywords = settings.keywords || false;
   const filterMerchants = settings.merchants || false;
   const filterBuying = settings.buying || false;
   const filterExposed = settings.exposed || false;
 
   // Select all ads
-  ads = document.querySelectorAll(
+  const ads = document.querySelectorAll(
     ".EntityList-item--Regular, .EntityList-item--VauVau"
   );
 
@@ -66,13 +65,16 @@ deleteAd = function (settings) {
     // *
     // * Check if a filtered keyword is in the title
     // *
-    if (filterKeywords) {
+    if (filterKeywords && filterString !== "") {
       const lowercaseTitle = title.toLowerCase();
+      const keywords = filterString.split(";");
       keywords.every((keyword) => {
         if (lowercaseTitle.includes(keyword)) {
           ad.remove();
           counter += 1;
-          console.log(`[KEYWORD HIT] Oglas z naslovom: "${title}" izbrisan`);
+          console.log(
+            `[KEYWORD HIT (${keyword})] Oglas z naslovom: "${title}" izbrisan`
+          );
           return false;
         }
         return true;
