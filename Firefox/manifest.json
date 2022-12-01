@@ -10,12 +10,20 @@
     "128": "icons/main.png"
   },
 
-  "permissions": ["activeTab"],
+  "permissions": ["storage", "activeTab"],
 
-  "browser_action": {
+  "page_action": {
+    "show_matches": ["https://www.bolha.com/*"],
     "browser_style": true,
     "default_icon": "icons/toolbar-32.png",
     "default_title": "Bolha++",
     "default_popup": "popup/settings.html"
-  }
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["https://www.bolha.com/*"],
+      "js": ["content-scripts/bolhapp.js"]
+    }
+  ]
 }
