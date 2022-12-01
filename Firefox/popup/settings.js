@@ -15,14 +15,17 @@ const defaultFilterKeywords =
 browser.storage.local.get("filter").then((item) => {
   keywordsInput.value = item.filter || defaultFilterKeywords;
 });
+
 browser.storage.local.get("merchants").then((item) => {
-  merchantsToggle.checked = item.merchants ??= true;
+  merchantsToggle.checked = item.merchants ??= false;
 });
+
 browser.storage.local.get("keywords").then((item) => {
-  keywordsToggle.checked = item.keywords ??= true;
+  keywordsToggle.checked = item.keywords ??= false;
 });
+
 browser.storage.local.get("buying").then((item) => {
-  buyingToggle.checked = item.buying ??= true;
+  buyingToggle.checked = item.buying ??= false;
 });
 
 // *

@@ -65,7 +65,7 @@ deleteAd = function (settings) {
       });
     }
   });
-  // Adding warning for user about number of removed ads
+  // Add warning for user about number of removed ads
   warning = document.createElement("h3");
   warning.textContent = `Število oglasov odstranjenih z Bolha Eliminatorjem: ${counter}`;
   warning.style.backgroundColor = "rgb(245, 196, 122)";
