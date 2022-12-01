@@ -94,3 +94,16 @@ deleteAd = function (settings) {
 browser.storage.local
   .get(["filter", "keywords", "merchants", "buying", "exposed"])
   .then(deleteAd);
+
+// *
+// * Blurred ad
+// *
+const blurredDiv = document.querySelector(
+  ".wrap-content.ClassifiedDetail.ClassifiedDetail--blurContent.cf"
+);
+if (blurredDiv) {
+  browser.storage.local.get("blur").then((settings) => {
+    // Keep only first class, others make it blurry
+    if (settings.blur) blurredDiv.classList = blurredDiv.classList[0];
+  });
+}
