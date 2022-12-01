@@ -68,7 +68,6 @@ deleteAd = function (settings) {
     if (filterKeywords && filterString !== "") {
       const lowercaseTitle = title.toLowerCase();
       const keywords = filterString.split(";");
-      console.log(keywords);
       keywords.every((keyword) => {
         if (lowercaseTitle.includes(keyword)) {
           ad.remove();
@@ -85,7 +84,6 @@ deleteAd = function (settings) {
 
   // If no ads on the page, skip
   if (ads.length) {
-    console.log(ads);
     // Add warning for user about number of removed ads
     warning = document.createElement("h3");
     warning.textContent = `Število oglasov odstranjenih z Bolha Eliminatorjem: ${counter}`;
