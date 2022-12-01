@@ -25,7 +25,7 @@
       "matches": ["https://www.bolha.com/*"],
       "exclude_matches": [
         "https://www.bolha.com/",
-        "https://www.bolha.com/moja-bolha"
+        "https://www.bolha.com/moja-bolha/*"
       ],
       "js": ["content-scripts/bolhapp.js"]
     }
