@@ -1,0 +1,33 @@
+{
+  "manifest_version": 2,
+  "name": "Bolha++",
+  "version": "1.1",
+
+  "description": "QOL improvements to Bolha.com",
+  "homepage_url": "https://github.com/LukaErnestini/BolhaEliminator/tree/main",
+
+  "icons": {
+    "128": "icons/main.png"
+  },
+
+  "permissions": ["storage", "activeTab"],
+
+  "page_action": {
+    "show_matches": ["https://www.bolha.com/*"],
+    "browser_style": true,
+    "default_icon": "icons/toolbar-32.png",
+    "default_title": "Bolha++",
+    "default_popup": "popup/settings.html"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["https://www.bolha.com/*"],
+      "exclude_matches": [
+        "https://www.bolha.com/",
+        "https://www.bolha.com/moja-bolha/*"
+      ],
+      "js": ["content-scripts/bolhapp.js"]
+    }
+  ]
+}
