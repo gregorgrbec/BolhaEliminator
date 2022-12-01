@@ -34,7 +34,9 @@ deleteAd = function (settings) {
     // *
     if (filterMerchants) {
       // <ul class="feature-items">
-      const ul = ad.children[0].children[6].children[0].children;
+      const ul =
+        ad.children[0].getElementsByClassName("entity-features")[0].children[0]
+          .children;
       let merchant = true;
       for (let i = 0; i < ul.length; i++) {
         const li = ul[i];
