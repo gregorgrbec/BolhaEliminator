@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Bolha++",
-  "version": "1.1",
+  "version": "2",
 
   "description": "QOL improvements to Bolha.com",
   "homepage_url": "https://github.com/LukaErnestini/BolhaEliminator/tree/main",
