@@ -28,6 +28,10 @@ browser.storage.local.get("buying").then((item) => {
   buyingToggle.checked = item.buying ??= false;
 });
 
+browser.storage.local.get("exposed").then((item) => {
+  exposedToggle.checked = item.exposed ??= false;
+});
+
 // *
 // * Element interaction listeners
 // *
@@ -62,5 +66,11 @@ merchantsToggle.addEventListener("change", (e) => {
 buyingToggle.addEventListener("change", (e) => {
   browser.storage.local.set({
     buying: buyingToggle.checked,
+  });
+});
+
+exposedToggle.addEventListener("change", (e) => {
+  browser.storage.local.set({
+    exposed: exposedToggle.checked,
   });
 });

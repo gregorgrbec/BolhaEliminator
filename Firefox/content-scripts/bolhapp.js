@@ -4,6 +4,7 @@ deleteAd = function (settings) {
   const filterKeywords = settings.keywords || false;
   const filterMerchants = settings.merchants || false;
   const filterBuying = settings.buying || false;
+  const filterExposed = settings.exposed || false;
 
   // Select all ads
   ads = document.querySelectorAll(
@@ -15,6 +16,19 @@ deleteAd = function (settings) {
   // Iterate each ad and delete unwanted ones
   ads.forEach((ad) => {
     const title = ad.children[0].children[0].children[0].innerHTML;
+
+    // *
+    // * Delete exposed ads (ads where users paid for exposure)
+    // *
+    if (filterExposed) {
+      if (ad.className.includes("VauVau")) {
+        ad.remove();
+        counter += 1;
+        console.log(`[IZPOSTAVLJEN] Oglas z naslovom: "${title}" izbrisan`);
+        return;
+      }
+    }
+
     // *
     // * Delete ads by merchants
     // * Ads contain an <ul> displaying if ad has location/video/merchant
@@ -75,5 +89,5 @@ deleteAd = function (settings) {
 };
 
 browser.storage.local
-  .get(["filter", "keywords", "merchants", "buying"])
+  .get(["filter", "keywords", "merchants", "buying", "exposed"])
   .then(deleteAd);
